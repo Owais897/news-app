@@ -1,5 +1,6 @@
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import TextField from "@mui/material/TextField";
 
 interface DropdownProps {
   label: string;
@@ -15,19 +16,19 @@ const Dropdown: React.FC<DropdownProps> = ({
   onChange,
 }) => {
   return (
-    <FormControl>
-      <InputLabel>{label}</InputLabel>
-      <Select
-        value={selectedValue}
-        onChange={(e) => onChange(e.target.value as string)}
-      >
-        {options.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <TextField
+      id="outlined-select-currency"
+      select
+      label={label}
+      defaultValue={options[0]}
+      onChange={(e) => onChange(e.target.value as string)}
+    >
+      {options.map((option) => (
+        <MenuItem key={option} value={option}>
+          {option}
+        </MenuItem>
+      ))}
+    </TextField>
   );
 };
 
