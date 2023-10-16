@@ -70,7 +70,11 @@ const NewsApp: React.FC = () => {
       </div>
 
       <div className="chips_container">
-        <Chips chips={language === "en" ? en : ar} onSearch={setQuery} />
+        <Chips
+          chips={language === "en" ? en : ar}
+          onSearch={setQuery}
+          query={query}
+        />
       </div>
       <div className="grid_cards">
         {loading ? (
