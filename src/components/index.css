@@ -1,0 +1,33 @@
+.news_app {
+  display: flex;
+  flex-direction: column;
+}
+
+.news_app .dropdowns_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.news_app .dropdowns_container div {
+  flex: 1;
+  width: 200px;
+}
+
+.news_app .grid_cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.news_app .card {
+  flex: 1;
+  margin-top: 10px;
+}
+
+.news_app .link {
+  text-decoration: none;
+  color: black;
+}
