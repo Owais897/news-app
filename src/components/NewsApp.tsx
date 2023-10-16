@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-
+import NewsCard from "./Card";
 import Dropdown from "./Dropdown";
-
+import Loader from "./Loader";
 import { fetchNews } from "../api";
 import "./index.css";
 
@@ -58,6 +58,33 @@ const NewsApp: React.FC = () => {
             options={["Light", "Dark"]}
           />
         </div>
+      </div>
+      <div className="grid_cards">
+        {loading ? (
+          <Loader />
+        ) : (
+          newsData.map(
+            (article: {
+              id: React.Key | null | undefined;
+              title: string;
+              description: string;
+              urlToImage: string;
+              url: string;
+              publishedAt: string;
+            }) => (
+              <div className="card">
+                <NewsCard
+                  key={article.id}
+                  title={article.title}
+                  description={article.description}
+                  imageUrl={article.urlToImage}
+                  articleUrl={article.url}
+                  publishedAt={article.publishedAt}
+                />
+              </div>
+            )
+          )
+        )}
       </div>
     </div>
   );
