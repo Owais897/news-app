@@ -10,13 +10,10 @@ const NewsApp: React.FC = () => {
   const [newsData, setNewsData] = useState([] as any);
   const [loading, setLoading] = useState(true);
   const [language, setLanguage] = useState("en");
-  const [theme, setTheme] = useState("Light");
   const [query, setQuery] = useState("apple");
-  console.log("query: ", query);
+
   const [sortBy, setSortBy] = useState("");
   const [duration, setDuration] = useState("");
-
-  // Fetch news data from the News API (You'll need to implement this)
 
   const getNews = useCallback(async () => {
     try {
@@ -37,7 +34,6 @@ const NewsApp: React.FC = () => {
   }, [duration, language, query, sortBy]);
 
   useEffect(() => {
-    // Fetch news data here and update the 'newsData' state.
     getNews();
   }, [getNews]);
 
@@ -56,15 +52,10 @@ const NewsApp: React.FC = () => {
               setQuery(newValue === "en" ? en[0] : ar[0]);
             }}
             label="Language"
-            options={["en", "ar"]}
-          />
-        </div>
-        <div>
-          <Dropdown
-            selectedValue={theme}
-            onChange={(newValue: string) => setTheme(newValue)}
-            label="Theme"
-            options={["Light", "Dark"]}
+            options={[
+              { label: "English", value: "en" },
+              { label: "Arabic", value: "ar" },
+            ]}
           />
         </div>
       </div>

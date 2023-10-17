@@ -1,12 +1,16 @@
 import React from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { MenuItem } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
 interface DropdownProps {
   label: string;
-  options: string[];
+  options: string[] | Option[];
   selectedValue: string;
   onChange: (newValue: string) => void;
+}
+interface Option {
+  label: string;
+  value: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -15,19 +19,27 @@ const Dropdown: React.FC<DropdownProps> = ({
   selectedValue,
   onChange,
 }) => {
+  const isStringArray = typeof options[0] === "string";
+
   return (
     <TextField
       id="outlined-select-currency"
       select
       label={label}
-      defaultValue={options[0]}
+      value={selectedValue}
       onChange={(e) => onChange(e.target.value as string)}
     >
-      {options.map((option) => (
-        <MenuItem key={option} value={option}>
-          {option}
-        </MenuItem>
-      ))}
+      {isStringArray
+        ? (options as string[]).map((option, index) => (
+            <MenuItem key={index} value={option}>
+              {option}
+            </MenuItem>
+          ))
+        : (options as Option[]).map((option, index) => (
+            <MenuItem key={index} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
     </TextField>
   );
 };
