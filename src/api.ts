@@ -1,7 +1,7 @@
 import axios from "axios";
 import Lang from "./utils/i18n";
 
-const apiKey = "586deb157593445bb581b17ac23db425";
+const apiKey = "83dc5360e7294e2baca212605036360b";
 const baseUrl = "https://newsapi.org/v2/everything";
 
 export async function fetchNews(topic: string) {
