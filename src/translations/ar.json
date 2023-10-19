@@ -1,0 +1,11 @@
+{
+  "mainpage": {
+    "title": "Multi-lingual News App arabic"
+  },
+  "chips": {
+    "value": ["أبل", "ميتا", "نيتفليكس", "جوجل", "تويتر", "تيسلا"]
+  },
+  "dropdown": {
+    "label": "لغة"
+  }
+}

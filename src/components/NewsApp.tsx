@@ -5,67 +5,59 @@ import Loader from "./Loader";
 import { fetchNews } from "../api";
 import "./index.css";
 import Chips from "./Chips";
+import Lang from "../utils/i18n";
+import { useTranslation } from "react-i18next";
 
 const NewsApp: React.FC = () => {
   const [newsData, setNewsData] = useState([] as any);
   const [loading, setLoading] = useState(true);
-  const [language, setLanguage] = useState("en");
   const [query, setQuery] = useState("apple");
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language;
 
-  const [sortBy, setSortBy] = useState("");
-  const [duration, setDuration] = useState("");
+  const { t } = useTranslation();
 
   const getNews = useCallback(async () => {
     try {
       setLoading(true);
-      let params = {
-        q: query,
-        from: duration,
-        sortBy: sortBy,
-        language: language,
-      };
-      let news = await fetchNews(params);
+      let news = await fetchNews(query);
 
       setNewsData(news.data.articles);
     } catch (error) {
     } finally {
       setLoading(false);
     }
-  }, [duration, language, query, sortBy]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentLanguage, query]);
 
   useEffect(() => {
     getNews();
   }, [getNews]);
 
-  const en = ["apple", "meta", "netflix", "google", "twitter", "tesla"];
-
-  const ar = ["أبل", "ميتا", "نيتفليكس", "جوجل", "تويتر", "تيسلا"];
+  useEffect(() => {
+    setQuery(t("chips:value.0"));
+  }, [currentLanguage, t]);
 
   return (
     <div className="news_app">
       <div className="dropdowns_container">
         <div>
           <Dropdown
-            selectedValue={language}
-            onChange={(newValue: string) => {
-              setLanguage(newValue);
-              setQuery(newValue === "en" ? en[0] : ar[0]);
+            selectedValue={currentLanguage}
+            onChange={(langId: string) => {
+              Lang.set(langId);
             }}
-            label="Language"
-            options={[
-              { label: "English", value: "en" },
-              { label: "Arabic", value: "ar" },
-            ]}
+            label={t("dropdown:label")} //"Language"
+            options={Object.keys(Lang.langs).map((lang) => ({
+              label: Lang.langs[lang].title,
+              value: lang,
+            }))}
           />
         </div>
       </div>
 
       <div className="chips_container">
-        <Chips
-          chips={language === "en" ? en : ar}
-          onSearch={setQuery}
-          query={query}
-        />
+        <Chips onSearch={setQuery} query={query} />
       </div>
       <div className="grid_cards">
         {loading ? (

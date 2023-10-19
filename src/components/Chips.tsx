@@ -1,18 +1,16 @@
 import React from "react";
 import { Chip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
-function Chips({
-  chips,
-  onSearch,
-  query,
-}: {
-  chips: string[];
-  onSearch: any;
-  query: string;
-}) {
+function Chips({ onSearch, query }: { onSearch: any; query: string }) {
+  const { t } = useTranslation();
+
+  const test: string[] = t("chips:value", { returnObjects: true });
+  console.log("test: ", test);
+
   return (
     <div>
-      {chips.map((chip) => (
+      {test.map((chip) => (
         <Chip
           label={chip}
           color={query === chip ? "success" : "default"}

@@ -1,0 +1,11 @@
+{
+  "mainpage": {
+    "title": "Multi-lingual News App"
+  },
+  "chips": {
+    "value": ["apple", "meta", "netflix", "google", "twitter", "tesla"]
+  },
+  "dropdown": {
+    "label": "language"
+  }
+}
