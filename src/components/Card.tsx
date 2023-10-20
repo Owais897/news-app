@@ -5,6 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import "./index.css";
 import NLines from "./Nlines";
+import formatDateToDmyUTC from "../utils/convertData";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function NewsCard({
   title,
@@ -14,6 +18,8 @@ export default function NewsCard({
   articleUrl,
   publishedAt,
 }: any) {
+  const { t } = useTranslation();
+
   const handleImageError = (e: any) => {
     e.target.onerror = null;
     e.target.src = "https://via.placeholder.com/150";
@@ -47,7 +53,14 @@ export default function NewsCard({
               {title}
             </NLines>
           }
-          subheader={publishedAt}
+          subheader={
+            <div className="display_flex">
+              <Tooltip title={t("card:publishedAt")} placement="top">
+                <AccessTimeIcon />
+              </Tooltip>
+              {formatDateToDmyUTC(publishedAt) || publishedAt}
+            </div>
+          }
         />
         <CardMedia
           onError={handleImageError}

@@ -30,3 +30,8 @@
 .chips_container {
   text-align: center;
 }
+
+.display_flex {
+  display: flex;
+  margin-top: 4px;
+}
