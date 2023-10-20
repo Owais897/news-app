@@ -3,14 +3,13 @@ import { initReactI18next } from "react-i18next";
 import en from "../translations/en.json";
 import ar from "../translations/ar.json";
 import { GenericObject } from "../types/common";
+import { STORAGE_KEY } from "../const";
 
 type Langs = Record<
   string,
   { translations: GenericObject; title: string; short: string; rtl: boolean }
 >;
 
-//constants
-export const STORAGE_KEY = "_lang_id_";
 const langs: Langs = {
   "en-US": {
     translations: en,

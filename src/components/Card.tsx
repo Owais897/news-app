@@ -4,6 +4,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import "./index.css";
+import NLines from "./Nlines";
 
 export default function NewsCard({
   title,
@@ -26,18 +27,26 @@ export default function NewsCard({
       target="_blank"
       rel="noreferrer"
     >
-      <Card sx={{ maxWidth: 345 }}>
+      <Card
+        sx={{
+          maxWidth: 345,
+          boxShadow:
+            "2px 2px 2px 3px rgba(0,0,0,0.2), 2px 2px 2px 2px rgba(0,0,0,0.14), 2px 2px 3px 2px rgba(0,0,0,0.12)",
+        }}
+      >
         <CardHeader
           sx={{
             "& .MuiTypography-h5": {
-              height: 80,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
               fontSize: 18,
+              fontWeight: 600,
+              direction: "unset",
             },
           }}
-          title={title}
+          title={
+            <NLines tooltip lines={2}>
+              {title}
+            </NLines>
+          }
           subheader={publishedAt}
         />
         <CardMedia
@@ -51,14 +60,13 @@ export default function NewsCard({
           <Typography
             style={{
               height: 100,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
             }}
             variant="body2"
             color="text.secondary"
           >
-            {description}
+            <NLines tooltip lines={5}>
+              {description}
+            </NLines>
           </Typography>
         </CardContent>
       </Card>

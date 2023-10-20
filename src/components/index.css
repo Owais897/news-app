@@ -10,11 +10,6 @@
   gap: 10px;
 }
 
-.news_app .dropdowns_container div {
-  flex: 1;
-  width: 200px;
-}
-
 .news_app .grid_cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
@@ -30,4 +25,8 @@
 .news_app .link {
   text-decoration: none;
   color: black;
+}
+
+.chips_container {
+  text-align: center;
 }

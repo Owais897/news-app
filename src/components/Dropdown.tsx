@@ -23,6 +23,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <TextField
+      sx={{ width: 200 }}
       id="outlined-select-currency"
       select
       label={label}

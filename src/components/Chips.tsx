@@ -5,13 +5,13 @@ import { useTranslation } from "react-i18next";
 function Chips({ onSearch, query }: { onSearch: any; query: string }) {
   const { t } = useTranslation();
 
-  const test: string[] = t("chips:value", { returnObjects: true });
-  console.log("test: ", test);
+  const chips: string[] = t("chips:value", { returnObjects: true });
 
   return (
     <div>
-      {test.map((chip) => (
+      {chips.map((chip) => (
         <Chip
+          key={chip}
           label={chip}
           color={query === chip ? "success" : "default"}
           onClick={() => {

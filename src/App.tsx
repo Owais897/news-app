@@ -5,14 +5,15 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import ThemeSwitch from "./components/ThemeSwitch";
-
 import { useTranslation } from "react-i18next";
 import "./utils/i18n";
 import Lang from "./utils/i18n";
 
+import AppControls from "./components/AppControls";
+import { THEME_STORAGE_KEY } from "./const";
+
 function App() {
-  const [theme, setTheme] = useState<PaletteMode>("light");
+  const theme = localStorage.getItem(THEME_STORAGE_KEY) || "light";
   const {
     t,
     i18n: { language: lang },
@@ -21,12 +22,13 @@ function App() {
 
   const darkTheme = createTheme({
     palette: {
-      mode: theme,
+      mode: theme as PaletteMode,
     },
     direction,
   });
 
-  const [checked, setChecked] = useState(false);
+  const check = darkTheme.palette.mode === "dark";
+  const [checked, setChecked] = useState(check);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -34,18 +36,7 @@ function App() {
       <div className="App" dir={direction}>
         <div className="title_container">
           <h1>{t("mainpage:title")}</h1>
-          <div>
-            <ThemeSwitch
-              onChange={(newValue) => {
-                setChecked(newValue.target.checked);
-                setTheme(
-                  newValue.target.checked ? "dark" : ("light" as PaletteMode)
-                );
-              }}
-              checked={checked}
-              sx={{ m: 1 }}
-            />
-          </div>
+          <AppControls checked={checked} setChecked={setChecked} />
         </div>
         <NewsApp />
       </div>
